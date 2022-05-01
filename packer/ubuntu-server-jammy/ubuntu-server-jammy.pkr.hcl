@@ -13,6 +13,13 @@ variable "proxmox_api_token_secret" {
     sensitive = true
 }
 
+variable "github_repository" {
+    type = string
+    sensitive = true
+}
+
+
+
 source "proxmox" "ubuntu-server-jammy" {
     proxmox_url = "${var.proxmox_api_url}"
     username = "${var.proxmox_api_token_id}"
@@ -58,13 +65,11 @@ source "proxmox" "ubuntu-server-jammy" {
         "e<wait>",
         "<down><down><down><end>",
         "<bs><bs><bs><bs><wait>",
-        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+        "autoinstall ds=nocloud-net\\;s=https://raw.githubusercontent.com/{{ var.github_repository }}/main/packer/ubuntu-server-jammy/http/ ---<wait>",
         "<f10><wait>"
     ]
     boot = "c"
-    boot_wait = "5s"
-
-    http_directory = "http" 
+    boot_wait = "10s"
 
     ssh_username = "administrator"
     ssh_password = "administrator"

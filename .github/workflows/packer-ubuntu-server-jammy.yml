@@ -9,7 +9,7 @@ on:
 
 jobs:
   packer:
-    runs-on: [self-hosted, ubuntu-latest]
+    runs-on: self-hosted
     name: packer
 
     steps:

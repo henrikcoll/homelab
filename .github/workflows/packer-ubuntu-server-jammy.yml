@@ -25,7 +25,7 @@ jobs:
           working_directory: packer/ubuntu-server-jammy
 
       - name: Delete old vm template
-        run: '-X "DELETE" -H "Authorization: $AUTH_HEADER" $URL'
+        run: 'curl -X "DELETE" -H "Authorization: $AUTH_HEADER" $URL'
         shell: bash
         env:
           SSH_KEY: ${{secrets.SSH_KEY}}

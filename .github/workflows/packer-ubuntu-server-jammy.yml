@@ -22,6 +22,7 @@ jobs:
           command: validate
           arguments: -syntax-only
           target: ubuntu-server-jammy.pkr.hcl
+          working_directory: packer/ubuntu-server-jammy
 
       - name: Delete old vm template
         uses: enflo/curl-action@master

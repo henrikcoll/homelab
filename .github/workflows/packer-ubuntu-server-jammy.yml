@@ -7,11 +7,9 @@ on:
       - "packer/ubuntu-server-jammy/**"
   workflow_dispatch:
 
-runs-on: [self-hosted]
-
 jobs:
   packer:
-    runs-on: ubuntu-latest
+    runs-on: [selfhosted, ubuntu-latest]
     name: packer
 
     steps:

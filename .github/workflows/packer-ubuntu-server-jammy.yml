@@ -25,9 +25,17 @@ jobs:
           working_directory: packer/ubuntu-server-jammy
 
       - name: Delete old vm template
+        run: '-X "DELETE" -H "Authorization: $AUTH_HEADER" $URL'
+        shell: bash
+        env:
+          SSH_KEY: ${{secrets.SSH_KEY}}
+          URL: "${{ secrets.proxmox_api_url }}/nodes/pve/qemu/900"
+          AUTH_HEADER: "PVEAPIToken=${{ secrets.packer_proxmox_api_token_id }}=${{ secrets.packer_proxmox_api_token_secret }}"
+
+      - name: Delete old vm template
         uses: enflo/curl-action@master
         with:
-          curl: "-X DELETE -H 'Authorization: PVEAPIToken=${{ secrets.packer_proxmox_api_token_id }}=${{ secrets.packer_proxmox_api_token_secret }}' ${{ secrets.proxmox_api_url }}/nodes/pve/qemu/900"
+          curl: "-X 'DELETE' -H 'Authorization: PVEAPIToken=${{ secrets.packer_proxmox_api_token_id }}=${{ secrets.packer_proxmox_api_token_secret }}' ${{ secrets.proxmox_api_url }}/nodes/pve/qemu/900"
 
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master

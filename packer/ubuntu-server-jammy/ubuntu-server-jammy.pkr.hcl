@@ -47,7 +47,7 @@ source "proxmox" "ubuntu-server-jammy" {
         type = "virtio"
     }
 
-    cores = "1"
+    cores = "2"
     
     memory = "2048" 
 

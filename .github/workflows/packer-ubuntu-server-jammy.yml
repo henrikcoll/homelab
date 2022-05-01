@@ -41,3 +41,4 @@ jobs:
           PKR_VAR_proxmox_api_url: ${{ secrets.proxmox_api_url }}
           PKR_VAR_proxmox_api_token_id: ${{ secrets.packer_proxmox_api_token_id }}
           PKR_VAR_proxmox_api_token_secret: ${{ secrets.packer_proxmox_api_token_secret }}
+          PKR_VAR_github_repository: ${{ github.repository }}

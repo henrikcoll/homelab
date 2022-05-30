@@ -61,14 +61,12 @@ source "proxmox" "ubuntu-server-focal" {
     cloud_init_storage_pool = "local-lvm"
 
     boot_command = [
-        "<esc><wait>",
-        "e<wait>",
-        "<down><down><down><end>",
-        "<bs><bs><bs><bs><wait>",
+        "<esc><wait><esc><wait>",
+        "<f6><wait><esc><wait>",
+        "<bs><bs><bs><bs><bs>",
         "autoinstall ds=nocloud-net\\;s=https://raw.githubusercontent.com/",
 		var.github_repository,
-		"/main/packer/ubuntu-server-focal/http/ ---<wait>",
-        "<f10><wait>"
+		"/main/packer/ubuntu-server-focal/http/ --- <enter>"
     ]
     boot = "c"
     boot_wait = "5s"

@@ -71,7 +71,7 @@ source "proxmox" "ubuntu-server-focal" {
         "<f10><wait>"
     ]
     boot = "c"
-    boot_wait = "10s"
+    boot_wait = "5s"
 
     ssh_username = "administrator"
     ssh_password = "administrator"

@@ -1,0 +1,52 @@
+name: Packer ubuntu-server-focal
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packer/ubuntu-server-focal/**"
+  workflow_dispatch:
+
+jobs:
+  packer:
+    runs-on: self-hosted
+    name: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: ubuntu-server-focal.pkr.hcl
+          working_directory: packer/ubuntu-server-focal
+
+      - name: Delete old vm template
+        run: 'curl -X "DELETE" -H "Authorization: $AUTH_HEADER" $URL'
+        shell: bash
+        env:
+          SSH_KEY: ${{secrets.SSH_KEY}}
+          URL: "${{ secrets.proxmox_api_url }}/nodes/pve/qemu/901"
+          AUTH_HEADER: "PVEAPIToken=${{ secrets.packer_proxmox_api_token_id }}=${{ secrets.packer_proxmox_api_token_secret }}"
+
+      - name: Delete old vm template
+        uses: enflo/curl-action@master
+        with:
+          curl: "-X 'DELETE' -H 'Authorization: PVEAPIToken=${{ secrets.packer_proxmox_api_token_id }}=${{ secrets.packer_proxmox_api_token_secret }}' ${{ secrets.proxmox_api_url }}/nodes/pve/qemu/901"
+
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: ubuntu-server-focal.pkr.hcl
+          working_directory: packer/ubuntu-server-focal
+        env:
+          PACKER_LOG: 1
+          PKR_VAR_proxmox_api_url: ${{ secrets.proxmox_api_url }}
+          PKR_VAR_proxmox_api_token_id: ${{ secrets.packer_proxmox_api_token_id }}
+          PKR_VAR_proxmox_api_token_secret: ${{ secrets.packer_proxmox_api_token_secret }}
+          PKR_VAR_github_repository: ${{ github.repository }}

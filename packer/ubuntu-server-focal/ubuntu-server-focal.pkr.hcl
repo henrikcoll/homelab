@@ -64,9 +64,10 @@ source "proxmox" "ubuntu-server-focal" {
         "<esc><wait><esc><wait>",
         "<f6><wait><esc><wait>",
         "<bs><bs><bs><bs><bs>",
-        "autoinstall ds=nocloud-net\\;s=https://raw.githubusercontent.com/",
+        "autoinstall ds=nocloud-net;s=https://raw.githubusercontent.com/",
 		var.github_repository,
-		"/main/packer/ubuntu-server-focal/http/ --- <enter>"
+		"/main/packer/ubuntu-server-focal/http/ ",
+        "--- <enter>"
     ]
     boot = "c"
     boot_wait = "5s"

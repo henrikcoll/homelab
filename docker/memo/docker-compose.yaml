@@ -1,0 +1,8 @@
+services:
+  memos:
+    image: neosmemo/memos:latest
+    restart: always
+    volumes:
+      - ./data/memos:/var/opt/memos
+    ports:
+      - 127.0.0.1:5230:5230

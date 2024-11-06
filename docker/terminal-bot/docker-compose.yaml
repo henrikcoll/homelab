@@ -1,13 +1,14 @@
-terminal:
-  image: ghcr.io/henrikcoll/terminal-bot:main
-  restart: always
-  container_name: terminal-bot
-  volumes:
-    - /root/data/terminal-bot:/app/data
-  environment:
-    DISCORD_TOKEN: ${DISCORD_TOKEN}
-    DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
-    DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
-    CTRL_CHANNEL_ID: ${CTRL_CHANNEL_ID}
-    PELICAN_API_KEY: ${PELICAN_API_KEY}
-    PELICAN_URL: ${PELICAN_URL}
+services:
+  terminal:
+    image: ghcr.io/henrikcoll/terminal-bot:main
+    restart: always
+    container_name: terminal-bot
+    volumes:
+      - /root/data/terminal-bot:/app/data
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
+      CTRL_CHANNEL_ID: ${CTRL_CHANNEL_ID}
+      PELICAN_API_KEY: ${PELICAN_API_KEY}
+      PELICAN_URL: ${PELICAN_URL}

@@ -9,6 +9,7 @@ services:
       APP_DEBUG: true
       APP_ENV: production
       XDG_DATA_HOME: /pelican-data
+      TRUSTED_PROXIES: "172.16.0.0/12"
     ports:
       - "127.0.0.1:9001:80"
     volumes:

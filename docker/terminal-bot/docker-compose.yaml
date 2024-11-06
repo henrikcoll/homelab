@@ -4,7 +4,7 @@ services:
     restart: always
     container_name: terminal-bot
     volumes:
-      - /root/data/terminal-bot:/app/data
+      - ./data:/app/data
     environment:
       DISCORD_TOKEN: ${DISCORD_TOKEN}
       DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}

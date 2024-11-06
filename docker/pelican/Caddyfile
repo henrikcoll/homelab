@@ -1,0 +1,14 @@
+{
+    admin off
+    email {$ADMIN_EMAIL}
+}
+
+{$APP_URL} {
+    root * /var/www/html/public
+    encode gzip
+
+    php_fastcgi 127.0.0.1:9000 {
+        trusted_proxies 10.0.0.0/8 192.168.0.0/16 172.16.0.0/12 127.0.0.1/8
+    }
+    file_server
+}

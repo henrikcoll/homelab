@@ -9,9 +9,9 @@ services:
       APP_DEBUG: true
       APP_ENV: production
       XDG_DATA_HOME: /pelican-data
-      TRUSTED_PROXIES: "*"
     ports:
       - "127.0.0.1:9001:80"
     volumes:
       - ./data/pelican:/pelican-data
       - ./data/logs:/var/www/html/storage/logs
+      - ./Caddyfile:/etc/caddy/Caddyfile
